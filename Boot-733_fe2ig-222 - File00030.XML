@@ -1,0 +1,765 @@
+<root>
+
+  <IndirectBlockList>
+    <IndirectBlock  name="REG_SKIN"       />
+    <IndirectBlock  name="REG_FANMATL"    />
+    <IndirectBlock  name="REG_TRANSFORM"  />
+    <IndirectBlock  name="REG_WORLD"      />
+    <IndirectBlock  name="REG_SHCOEFF"    />
+    <IndirectBlock  name="REG_SHEAR"      />
+    <IndirectBlock  name="REG_CAMERAPOS"  />
+    <IndirectBlock  name="REG_LIGHTING"   />
+    <IndirectBlock  name="REG_FANEXTENTS" />
+  </IndirectBlockList>
+
+  <!-- We want all our variables to step and not be interpreted linearly at the moment -->
+<VariableList defaultBlendMode="step">
+
+    <!-- Lighting -->
+
+	<!-- MOTION BLUR -->
+
+	<Float                  name="motionBlurCharacterParams"                                scopeBlock="motionblur" scopeName="motionBlurCharacterParams" default="0f" blendMode="linear" uidata="0.0, 10.0, 0.1"/>
+	<Float                  name="kVelocityFrameExposure"                                   scopeBlock="motionblur" scopeName="kVelocityFrameExposure" default="0f" blendMode="linear" uidata="0.0, 1.0,  0.05"/>
+	<Float                  name="kVelocityRangePrecisionScale"                             scopeBlock="motionblur" scopeName="kVelocityRangePrecisionScale" default="100f" blendMode="linear" uidata="0.0, 10.0, 1.0"/>
+	<Float                  name="kVelocityGeoScale"                                        scopeBlock="motionblur" scopeName="kVelocityGeoScale" default="0f" blendMode="linear" uidata="0.0, 10.0, 0.01"/>
+	<Vector2                name="kVelocityClamp"                                           scopeBlock="motionblur" scopeName="kVelocityClamp" default="1 1" blendMode="linear" uidata="0.0, 5.0,  0.1"/>
+	<Float                  name="kVelocityFrameExposureSimple"                             scopeBlock="motionblur" scopeName="kVelocityFrameExposureSimple" default="0f" blendMode="linear" uidata="0.0, 1.0,  0.01"/>
+	<Float                  name="kVelocityGeoScaleSimple"                                  scopeBlock="motionblur" scopeName="kVelocityGeoScaleSimple" default="0f" blendMode="linear" uidata="0.0, 10.0, 1.0"/>
+	<Float                  name="kVelocityClampSimple"                                     scopeBlock="motionblur" scopeName="kVelocityClampSimple" default="1f" blendMode="linear" uidata="0.0, 10.0, 0.01"/>
+	<Float                  name="kVelocityEnvBlendThresh"                                  scopeBlock="motionblur" scopeName="kVelocityEnvBlendThresh" default="1f" blendMode="linear" uidata="0.0, 10.0, 0.01"/>
+
+
+
+
+	<!-- Player: General-->
+    <SphericalHarmonic    name="PlyrSH"                                                   scopeBlock="lighting"   scopeName="gPlayerSH_Default"                         blendMode="step"      default="SH_clearCloudy_1230_onField_G.sha" />
+    <Texture              name="PlyrHelmetEnvMap"                                         scopeBlock="lighting"   scopeLerpName="helmetReflectDelta"                    blendMode="step"      default="black_col"                   scopeCurrentTextureName="cubeColor"           scopeNextTextureName="nextHelmetEnvTexture" />
+    <Texture              name="PlyrHelmetBlurryEnvMap"                                   scopeBlock="lighting"   scopeLerpName="helmetBlurryReflectDelta"              blendMode="step"      default="invisible_col"               scopeCurrentTextureName="skinEnvMap"          scopeNextTextureName="nextHelmetBlurryEnvTexture" />
+    
+    <Vector4			  name="PlyrSpecColor__PlyrReflectionIntensity"                   scopeBlock="lighting"   scopeName="gSpecColor"							                  blendMode="linear"      default="1.000 1.000 1.000 1.00"      editor="color" />
+    <Vector4              name="gSpecHDRHotspotFleck_xySun_zwStadium"                     scopeBlock="lighting"   scopeName="gSpecHDRHotspotFleck_xySun_zwStadium"      blendMode="linear"      default="1.00 1.00 1.00 1.00"                   uidata="0.00,100.00,0.1" />
+    
+    <!-- Multi vector lighting -->
+    <Vector4                name="PlyrSpecScale_MV"                                         scopeBlock="lighting"            scopeName="gPlayerDirectSpecularScaleMultiVector"              blendMode="linear"      default="1.000 1.000 1.000 1.00" />
+    <Vector4                name="PlyrDiffuseScale_MV"                                      scopeBlock="lighting"            scopeName="gPlayerDirectDiffuseScaleMultiVector"               blendMode="linear"      default="1.000 1.000 1.000 1.00" />
+    <Vector4                name="PlyrRimPower_def_skin_jers_pants_MV"                      scopeBlock="lighting"            scopeName="gRimPower_default_skin_jersey_pants"                blendMode="linear"      default="1.000 1.000 1.000 1.00" />
+    <Vector4                name="PlyrRimInt_def_skin_jers_pants_MV"                        scopeBlock="lighting"            scopeName="gRimInt_default_skin_jersey_pants"                  blendMode="linear"      default="1.000 1.000 1.000 1.00" />
+    <Vector4                name="PlyrSSSscale_MV"                                          scopeBlock="lighting"            scopeName="gPlayerSSSscale"                                    blendMode="linear"      default="0.75 0.25 0.25 0.0" />
+    <Vector3                name="PlyrDirectLight2_MV"                                      scopeBlock="lighting"            scopeName="gPlayerDirectLight2"                                blendMode="linear"      default="-0.8944 0.4472 0.000" />
+    <Vector3                name="PlyrDirectLight3_MV"                                      scopeBlock="lighting"            scopeName="gPlayerDirectLight3"                                blendMode="linear"      default="0.8944 0.4472 0.000" />
+    <Vector3                name="PlyrDirectLight4_MV"                                      scopeBlock="lighting"            scopeName="gPlayerDirectLight4"                                blendMode="linear"      default="0 0.4472 0.8944" />
+    <Vector3                name="PlyrDirectLight2Color_MV"					                scopeBlock="lighting"            scopeName="gPlayerDirectLight2Color"		                        blendMode="linear"      default="1.000 1.000 1.000"	editor="color"/>
+    <Vector3                name="PlyrDirectLight3Color_MV"					                scopeBlock="lighting"            scopeName="gPlayerDirectLight3Color"		                        blendMode="linear"      default="1.000 1.000 1.000"	editor="color"/>
+    <Vector3                name="PlyrDirectLight4Color_MV"					                scopeBlock="lighting"            scopeName="gPlayerDirectLight4Color"		                        blendMode="linear"      default="1.000 1.000 1.000"	editor="color"/>
+    <Vector4                name="PlyrRimColor"												scopeBlock="lighting"            scopeName="gRimColor"				                                  blendMode="linear"      default="0.750 0.727 0.596 1.0"     editor="color" />
+    <Vector4                name="gHelmetNightSpecControls"                                 scopeBlock="lighting"            scopeName="gHelmetNightSpecControls"                           blendMode="linear"      default="0.000 1.000 1.000 1.00" />
+
+    <!-- Player: Shadowing -->
+    <Boolean              name="PlyrShadowFourPoint"                                      scopeBlock="lighting"   scopeName="useFourWayPlayerShadow"                    blendMode="step"      default="FALSE" />
+    <Float                name="PlyrShadowNightIntensity"                                 scopeBlock="lighting"   scopeName="playerShadowNightIntensity"                blendMode="linear"      default="-2.50"                       uidata="-10.00,20.00,0.05" />
+    <Float                name="PlyrShadowBlur"                                           scopeBlock="shadows"    scopeName="fieldshadowstrength"                       blendMode="linear"      default="1.00"                        uidata="0.00,10.00,0.01" />
+    <Vector4              name="PlyrContactShadowColor__ContactShadowIntensity"           scopeBlock="shadows"    scopeName="aoShadowColor"                             blendMode="linear"      default="0.000 0.000 0.000 1.000"     uidata="-10.00,10.00,0.01" />
+    <Float                name="PlyrContactShadowRadius"                                  scopeBlock="shadows"    scopeName="aoShadowRadiusScale"                       blendMode="linear"      default="2.50"	                      uidata="0.00,100.00,0.01" />
+    <Vector4              name="SimpleContactShadowColor"                                 scopeBlock="shadows"    scopeName="aoSimpleShadowColor"                       blendMode="step"      default="0.000 0.000 0.000 0.80"      editor="color" />
+    <Float                name="SimpleContactShadowRadius"                                scopeBlock="shadows"    scopeName="aoSimpleShadowRadiusScale"                 blendMode="linear"      default="2.50"                        uidata="0.00,100.00,0.01" />
+    <Float                name="SimpleContactShadowMaxBaseHeight"                         scopeBlock="shadows"    scopeName="aoSimpleShadowMaxBaseHeight"               blendMode="linear"      default="9.0"                         uidata="0.00,100.00,0.01" />
+    
+    <!-- Player: Self Shadowing -->
+    <Vector4              name="PlyrSelfShadowBiasDistanceFalloffStart"                   scopeBlock="lighting"   scopeName="gSelfShadowBiasDistanceFalloffStart"       blendMode="linear"      default="0.003 10.000 0.500 0.000"    min="-100.0f -100.0f -100.0f -100.0f"         max="100.0f 100.0f 100.0f 100.0f"                 uidata="0.000,1000.0000,0.050" />
+    <Boolean              name="PlyrSelfShadows"                                          scopeBlock="lighting"   scopeName="gSelfShadowsEnabled"                       blendMode="step"      default="TRUE" />
+    <Float                name="SelfShadowEdgeBlurryness"                                 scopeBlock="lighting"   scopeName="gResultMultiplier"                         blendMode="linear"      default="3.0"                         uidata="0.00,100.00,0.01" />
+    <Boolean              name="gSelfShadowsIncRangeOnFov"                                scopeBlock="lighting"   scopeName="gSelfShadowsIncRangeOnFov"                 blendMode="step"      default="TRUE" />
+    <Boolean              name="gSelfShadowsEnableFullFrustumVisibility"                  scopeBlock="lighting"   scopeName="gSelfShadowsEnableFullFrustumVisibility"   blendMode="step"      default="FALSE" />
+    <Boolean              name="gSelfShadowsEnableStabilization"                          scopeBlock="lighting"   scopeName="gSelfShadowsEnableStabilization"           blendMode="step"      default="TRUE" />
+    <Vector3              name="gSelfShadowsMaxSplitRanges"                               scopeBlock="lighting"   scopeName="gSelfShadowsMaxSplitRanges"                blendMode="linear"      default="80.00, 80.00, 80.00"         uidata="0.00,3000.00,1.00" />
+    <Vector3				      name="PlyrSelfShadowsModeRanges"								                scopeBlock="lighting"	  scopeName="gSelfShadowsModeRanges"					          blendMode="linear"      default="10.00 12.500 28.00"		      min="-100.0f -100.0f -100.0f"                 max="100.0f 100.0f 100.0f" 							          uidata="0.00,1000.0,0.50" />
+    <Vector4              name="SelfShadowBiasDefault__XenonHelmet__Face__xxx__xxx"       scopeBlock="lighting"   scopeName="gSelfShadowBiasDefault"                    blendMode="linear"      default="0.01 0.06 0.0 0.0"           uidata="0.00,10.00,0.0001" />
+    <Vector4              name="SelfShadowBiasExterior__XenonHelmet__Face__xxx__xxx"      scopeBlock="lighting"   scopeName="gSelfShadowBiasExterior"                   blendMode="linear"      default="0.01 0.06 0.0 0.0"           uidata="0.00,10.00,0.0001" />
+
+    <!-- Player: General Exterior-->
+    <SphericalHarmonic    name="PlyrSH_Exterior"                                          scopeBlock="lighting"   scopeName="gPlayerSH_Exterior"                        blendMode="step"      default="SH_clearCloudy_1230_Global.sha" />
+
+      <!-- CubemapControls (Helmets and Pressbox Glass) -->
+    <Vector3      	      name="fieldBC_Sat" 	                                    	      scopeBlock="cubemapcontrols"      scopeName="fieldBC_Sat"			     	          blendMode="linear"      default="0.50 0.50 0.50" />
+    <Vector3      	      name="fieldLevelsIMin_IMid_IMax"                            	  scopeBlock="cubemapcontrols"      scopeName="fieldLevelsIMin_IMid_IMax"	     	blendMode="linear"      default="0.00 1.00 1.00" />
+    <Vector2      	      name="fieldLevelsOMin_OMax"                               		  scopeBlock="cubemapcontrols"      scopeName="fieldLevelsOMin_OMax"	     	    blendMode="linear"      default="0.00 0.30" />
+    <Vector4      	      name="StadiumSkyBC"                               	 		        scopeBlock="cubemapcontrols"      scopeName="StadiumSkyBC"	   	     	     	  blendMode="linear"      default="1.00 -0.30 1.00 0.50" />
+    <Vector3      	      name="StadiumLevelsIMin_IMid_IMax"                         	 	  scopeBlock="cubemapcontrols"      scopeName="StadiumLevelsIMin_IMid_IMax"	    blendMode="linear"      default="0.00 1.00 1.00" />
+    <Vector3      	      name="SkyLevelsIMin_IMid_IMax"                             		  scopeBlock="cubemapcontrols"      scopeName="SkyLevelsIMin_IMid_IMax"	     	  blendMode="linear"      default="0.00 1.00 1.00" />
+    <Vector2      	      name="StadiumLevelsOMin_OMax"                             		  scopeBlock="cubemapcontrols"      scopeName="StadiumLevelsOMin_OMax"	     		blendMode="linear"      default="0.00 0.30" />
+    <Vector2      	      name="SkyLevelsOMin_OMax"                             		      scopeBlock="cubemapcontrols"      scopeName="SkyLevelsOMin_OMax"	     		    blendMode="linear"      default="0.00 1.00" />
+    <Vector2      	      name="StadiumSkySat"                             	 		          scopeBlock="cubemapcontrols"      scopeName="StadiumSkySat"	     			        blendMode="linear"      default="1.00 0.70" />
+    <Float                name="BankGlareScaleControl"                                    scopeBlock="lighting"             scopeName="gGlareScaleBLEControl"           blendMode="linear"      default="5.0"                         uidata="0.00,100.0,0.01" />
+	<Float                name="cubeMapExposure"                                    scopeBlock="post"             scopeName="cubeMapExposure"           blendMode="linear"      default="0.50"                         uidata="0.00,100.0,0.01" /> 
+    
+    <!-- Football -->
+    <Vector4              name="BallContactShadowColor"                                   scopeBlock="lighting_uimapping"   scopeName="gPlyAoBallShadowColor"           blendMode="step"      default="0.000 0.000 0.500 0.000"     editor="color" />
+    <Float                name="BallContactShadowIntensity"                               scopeBlock="lighting_uimapping"   scopeName="gPlyAoBallShadowInt"             blendMode="linear"      default="0.80" />
+    <Float                name="BallContactShadowRadius"                                  scopeBlock="shadows"              scopeName="aoBallShadowRadiusScale"         blendMode="linear"      default="0.5"                         uidata="0.00,100.0,0.01" />
+    <Float                name="BallContactShadowMaxHeight"                               scopeBlock="shadows"              scopeName="aoBallShadowMaxBaseHeight"       blendMode="linear"      default="8.0"                         uidata="0.00,100.0,0.01" />
+
+    <!-- Environment: General -->
+    <SphericalHarmonic      name="EnvSH"                                                      scopeBlock="lighting"         scopeName="gEnvironmentSH"                          blendMode="step"      default="SH_clearCloudy_1230_Global.sha" />
+    <Texture                name="envCubeMap"                                                 scopeBlock="lighting"         scopeLerpName="envReflectDelta"                     blendMode="step"      default="black_col"                   scopeCurrentTextureName="currCubeMap"         scopeNextTextureName="nextCubeMap" />
+    <Vector3                name="StadiumShadowBoundingBox__X__Y__Z"                          scopeBlock="shadows"          scopeName="stadiumShadowBoundingBox"                blendMode="linear"      default="200.0 200.0 256.0"           uidata="0,10000,1" />  
+    <!-- Reference to the light direction so that we can modify it with operations -->
+    <Vector4                name="DirectionalLightPosition__EnvNightVertexColorBlend"         scopeBlock="lighting"         scopeName="gXYZLightDirWenvNightScaleRef"           blendMode="linear"      default="0.700 0.700 0.000 0.00" />
+    <Vector4                name="DirectionalLightPosition__EnvNightVertexColorBlend__Gameplay" scopeBlock="lighting"        scopeName="gXYZLightDirWenvNightScaleRefGameplay"  blendMode="linear"      default="0.700 0.700 0.000 0.00" />
+    <Vector4                name="DirectionalLightPosition__EnvNightVertexColorBlend_Output"  scopeBlock="lighting"         scopeName="gXYZLightDirWenvNightScale"              blendMode="linear"      default="0.200 0.700 0.000 0.00"      indirectBlock="REG_LIGHTING" />
+	<Vector3 name="skyLightDir"											scopeBlock="sky_material" scopeName="skyLightDirRef"									blendMode="linear" default="0.00 0.71 0.71"/>
+	<Vector4                name="DirectionalLightColor__EnvNightOccBlend"                    scopeBlock="lighting"         scopeName="gXYZDirectColorWenvNightOccBlend"        blendMode="linear"      default="1.000 1.000 1.000 0.00"      indirectBlock="REG_LIGHTING"                  editor="color" />
+	<Vector4                name="GblDirect__GblAmbient__xxx__xxx"						                scopeBlock="lighting"         scopeName="gXDirectYAmbientZSkindirectWSkinambient" blendMode="linear"      default="1.00 1.00 0.00 0.00"         indirectBlock="REG_LIGHTING"                  uidata="0.00,20.00,0.01" />
+    <Vector4                name="PlyrDirect__PlyrAmbient__EnvDirect__EnvAmbient"             scopeBlock="lighting"         scopeName="gXpDirectYpAmbientZeDirectWeAmbient"     blendMode="linear"      default="1.00 1.00 1.00 1.00"         indirectBlock="REG_LIGHTING"                  uidata="0.00,100.00,0.01" />
+    <Vector4                name="PlyrDirect__PlyrAmbient__EnvDirect__EnvAmbient__Gameplay"    scopeBlock="lighting"         scopeName="gXpDirectYpAmbientZeDirectWeAmbientGameplay"  blendMode="linear"      default="1.00 1.00 1.00 1.00"   uidata="0.00,100.00,0.01" />
+    <Vector4                name="snowColor"                                                  scopeBlock="lighting"         scopeName="snowColor"                               blendMode="step"      default="1.0 1.0 1.0 1.0"             uidata="0.0,10.0,0.01" editor="color" />
+    <Vector4                name="CustomShadowVector"       								  scopeBlock="lighting"         scopeName="gXYZShadowVector"                       	blendMode="linear"    default="0.82 0.57 0.000 0.000"   />
+	<Float                  name="EnvVertColorPow"                                            scopeBlock="lighting"         scopeName="gVertColorEnvPowControl"                 blendMode="linear"      default="1.0"                         uidata="0.0,200.0,0.01" />
+    <Vector4                name="DirectVertColorTint_AOIntensity"                            scopeBlock="lighting"         scopeName="gDirectVertColorTint_AOIntensity"        blendMode="linear"      default="1.0 1.0 1.0 0.0"             editor="color" />
+    <Vector4                name="BackgroundVertColor"                                        scopeBlock="lighting"         scopeName="gBackgroundVertColorTint"                blendMode="linear"      default="0.2 0.2 0.2 0.0"             editor="color" />
+    <Boolean                name="DynamicEnvMapsEnabled"                                      scopeBlock="lighting"         scopeName="DynamicEnvMapsEnabled"                   blendMode="step"      default="TRUE" />
+    <Float                  name="EnvReflectionScale"                                         scopeBlock="lighting"         scopeName="gEnvReflectionScale"                     blendMode="linear"      default="0.02"                        uidata="0.0,200.0,0.01" />
+    <Float                  name="EnvReflectionBias"                                          scopeBlock="lighting"         scopeName="reflectionBias"                          blendMode="linear"      default="1.0"                         uidata="-1.0,1.0,0.01" />
+    <Float                  name="EnvOpacityBias"                                             scopeBlock="lighting"         scopeName="gEnvOpacityBias"                         blendMode="linear"      default="1.0"                         uidata="-1.0,10.0,0.01" />
+    <Float			            name="gGlowIntensity"                             		            scopeBlock="lighting"         scopeName="gGlowIntensity"	     			              blendMode="linear"      default="1.0" 									      uidata="0.0,10.0,0.01"  />
+    <Boolean                name="StadiumShadows"                                             scopeBlock="lighting"         scopeName="useStadiumShadows"                       blendMode="step"      default="TRUE" />
+    <Float                  name="jumbotronIntensity"				                                  scopeBlock="lighting"         scopeName="jumbotronIntensity"					            blendMode="linear"      default="1.00"	                      uidata="-0.50,100.00,0.01" />
+	<Boolean                name="UseCustomShadowVector"                                	  scopeBlock="lighting"         scopeName="useCustomShadowVector"					blendMode="step"      default="FLASE" />
+
+    <!-- Environment: Interior Vignette -->
+    <Vector4                name="TunnelVLM__Exterior_Interior_SHShadow_xxx"                  scopeBlock="lighting"         scopeName="tunnelLightMix"                          blendMode="step"      default="0.00 1.00 0.00 0.00"         uidata="0.0,500.0,0.01" />
+    <Boolean                name="useSelfShadowOnWalls"                                       scopeBlock="lighting"         scopeName="useSelfShadowOnWalls"                    blendMode="step"      default="FALSE" />
+
+	<!-- Environment: Stadium Exterior Vignettes -->
+	<Boolean                name="useExteriorSnow"											scopeBlock="lighting"            scopeName="useExteriorSnow"								  blendMode="step"      default="FALSE" />
+	<Float                  name="stadiumExteriorSnowAmount"                                scopeBlock="lighting"            scopeName="stadiumExteriorSnowAmount"                        blendMode="step"      default="10.00"                     uidata="0.00,100.00,0.10" />
+	<Boolean                name="gSelfShadowsUseFixedBox"                                  scopeBlock="lighting"            scopeName="gSelfShadowsUseFixedBox"		                  blendMode="step"      default="FALSE" />
+	<Boolean                name="gSelfShadowsEnabledFixedBoxEditing"                       scopeBlock="lighting"            scopeName="gSelfShadowsEnabledFixedBoxEditing"	              blendMode="step"      default="FALSE" />
+	<Vector3                name="gSelfShadowsFixedBoxCenter"                               scopeBlock="lighting"            scopeName="gSelfShadowsFixedBoxCenter"                       blendMode="step"      default="0.00, 0.00, 0.00"          uidata="-1000.00,1000.00,1.00" />
+	<Vector3                name="gSelfShadowsFixedBoxHalfExtents"                          scopeBlock="lighting"            scopeName="gSelfShadowsFixedBoxHalfExtents"                  blendMode="step"      default="5.000 5.000 5.000"         uidata="-1000.00,1000.00,1.00" />
+	
+	<!-- Sun -->
+	<Vector3                name="SunColor"                                                 scopeBlock="lighting"            scopeName="sunMainColor" 		                              blendMode="step"      default="  0.000   0.000    0.000"   editor="color" />
+	<Vector3                name="SunXYScaleZDist"                                          scopeBlock="lighting"            scopeName="sunXYScaleZDist" 		                         blendMode="step"      default="  200.000   200.000  400.000"   uidata="0.0,200000.00,0.05" />
+	<Vector2                name="SunXRotOffsetYRotOffset"                                  scopeBlock="lighting"            scopeName="sunXRotOffsetYRotOffset" 		                  blendMode="step"      default="-30.000 -10.000"            uidata="-360,360.00,0.05" />
+
+	<!-- Sky Dome Material Scopeblock -->
+	<Vector4 name="windDir_SKY"											scopeBlock="sky_material" scopeName="windDir_SKY"										blendMode="linear" default="0.5 1.0 0.10 0.0"  uidata="-1.00 1.00 0.10"/>
+    <Float   name="windSpeed_SKY"										scopeBlock="sky_material" scopeName="windSpeed_SKY"										blendMode="linear" default="0.035" uidata="0.00 1.00 0.010" />
+ 
+	<Vector3 name="skyTopColor_SKY"										scopeBlock="sky_material" scopeName="skyTopColor_SKY"									blendMode="linear" default="0.04 0.330 0.580" editor="color" />
+	<Vector3 name="skyPolarColor_SKY"									scopeBlock="sky_material" scopeName="skyPolarColor_SKY"									blendMode="linear" default="0.00 0.000 0.000" editor="color" />
+
+	<Vector3 name="skyHorizonColor_NearSun_SKY"							scopeBlock="sky_material" scopeName="skyHorizonColor_NearSun_SKY"						blendMode="linear" default="0.48 0.58 0.70" editor="color" />
+	<Vector3 name="skyHorizonColor_SKY"									scopeBlock="sky_material" scopeName="skyHorizonColor_SKY"								blendMode="linear" default="0.48 0.58 0.70" editor="color" />
+ 
+	<Vector3 name="skyOverHorizonColor_NearSun_SKY"						scopeBlock="sky_material" scopeName="skyOverHorizonColor_NearSun_SKY"					blendMode="linear" default="0.65 0.63 0.07" editor="color" />
+    <Vector3 name="skyOverHorizonColor_SKY"								scopeBlock="sky_material" scopeName="skyOverHorizonColor_SKY"							blendMode="linear" default="0.55 0.74 0.76" editor="color" />
+
+	<Vector2 name="skySun_GlowIntensity_Falloff_SKY"					scopeBlock="sky_material" scopeName="skySun_GlowIntensity_Falloff_SKY"					blendMode="linear" default="1.00 1.00"/>
+	<Vector3 name="skySun_GlowColor_SKY"								scopeBlock="sky_material" scopeName="skySun_GlowColor_SKY"								blendMode="linear" default="0.65 0.38 0.13" editor="color"/>
+
+	<Vector3 name="cloudDensityLow_mid_high_SKY"						scopeBlock="sky_material" scopeName="cloudDensityLow_mid_high_SKY"						blendMode="step" default="1.00 1.00 1.00" uidata="0.00 1.00 0.10" />
+	<Vector2 name="cloudRim_Intensity_Power_SKY"						scopeBlock="sky_material" scopeName="cloudRim_Intensity_Power_SKY"						blendMode="linear" default="5.00 10.00"/>
+	<Float   name="cloudShadingIntensity_SKY"							scopeBlock="sky_material" scopeName="cloudShadingIntensity_SKY"							blendMode="linear" default="0.00" />
+	<Vector2 name="cloudShaded_Highlight_Underlight_SKY"				scopeBlock="sky_material" scopeName="cloudShaded_Highlight_Underlight_SKY"				blendMode="linear" default="1.00 0.00"/>
+	
+	<Vector3 name="cloudColor_Midtone_NearSun_SKY"						scopeBlock="sky_material" scopeName="cloudColor_Midtone_NearSun_SKY"					blendMode="linear" default="1.00 1.00 1.00" editor="color" />	
+	<Vector3 name="cloudColor_Highlight_SKY"							scopeBlock="sky_material" scopeName="cloudColor_Highlight_SKY"							blendMode="linear" default="1.00 1.00 1.00" editor="color" />	
+	<Vector3 name="cloudColor_Highlight_NearSun_SKY"					scopeBlock="sky_material" scopeName="cloudColor_Highlight_NearSun_SKY"					blendMode="linear" default="1.00 1.00 1.00" editor="color" />
+	
+	<Float   name="cloudColorFalloff_SKY"								scopeBlock="sky_material" scopeName="cloudColorFalloff_SKY"								blendMode="linear" default="0.15" />
+	<Vector3 name="cloudShadeColor_NearSun_SKY"							scopeBlock="sky_material" scopeName="cloudShadeColor_NearSun_SKY"						blendMode="linear" default="0.25 0.25 0.25" editor="color" />	
+	<Vector3 name="cloudShadeColor_SKY"									scopeBlock="sky_material" scopeName="cloudShadeColor_SKY"								blendMode="linear" default="0.25 0.25 0.25" editor="color" />
+	
+	<Vector2 name="cloudHighTiling_SKY"									scopeBlock="sky_material" scopeName="cloudHighTiling_SKY"								blendMode="step" default="4.00 4.00"/>
+	<Vector3 name="cloudLowAndMidTiling_SKY"							scopeBlock="sky_material" scopeName="cloudLowAndMidTiling_SKY"							blendMode="step" default="2 1.70 -0.70" />
+	
+	<Vector3 name="skyFogHeight_Falloff_SunPower_SKY"					scopeBlock="sky_material" scopeName="skyFogHeight_Falloff_SunPower_SKY"					blendMode="linear" default="0.2 0.0 1.5" />
+	<Vector2 name="skyGradientHeight_Falloff_SKY"						scopeBlock="sky_material" scopeName="skyGradientHeight_Falloff_SKY"						blendMode="linear" default="0.3 0.00"/>	
+	<Vector2 name="skyGradientMidHeight_Falloff_SKY"					scopeBlock="sky_material" scopeName="skyGradientMidHeight_Falloff_SKY"					blendMode="linear" default="0.6 0.00"/>
+
+	<Vector2 name="skyGradientPolarHeight_Falloff_SKY"					scopeBlock="sky_material" scopeName="skyGradientPolarHeight_Falloff_SKY"				blendMode="linear" default="1.75 0.50"/>	
+	<Vector2 name="cloudFadeHeight_Falloff_SKY"							scopeBlock="sky_material" scopeName="cloudFadeHeight_Falloff_SKY"						blendMode="linear" default="0.50 -0.25"/>
+
+	<Float   name="skyIntensity_SKY"									scopeBlock="sky_material" scopeName="skyIntensity_SKY"									blendMode="linear" default="1.00" />
+	<Vector2 name="minMaxBracket_SKY"									scopeBlock="sky_material" scopeName="minMaxBracket_SKY"									blendMode="linear" default="0.0 255.0"/>
+	<Float   name="cloudBrightness_SKY"									scopeBlock="sky_material" scopeName="cloudBrightness_SKY"								blendMode="linear" default="1.00" />
+
+	<Float   name="cloudOrientation_SKY"								scopeBlock="sky_material" scopeName="cloudOrientation_SKY"								blendMode="linear" default="1.00" uidata="-1.00 1.00 0.10"/>
+
+	<Vector3 name="fogColorSky_SKY"										scopeBlock="sky_material" scopeName="fogColorSky_SKY"									blendMode="linear" default="0.5 0.5 0.5" editor="color" /> 	
+	<Vector3 name="fogColorSun_SKY"										scopeBlock="sky_material" scopeName="fogColorSun_SKY"									blendMode="linear" default="1.0 0.5 0.5" editor="color" />
+
+	<Texture name="cloudMapHigh"										scopeBlock="sky_material" scopeLerpName="CloudMapDensityHigh"							scopeCurrentTextureName="CloudMapDensityHigh" scopeNextTextureName="CloudMapDensityHighSampler" blendMode="step"	default="_Clouds_High_02_SKY_HIGH" />
+	<Texture name="cloudMapMid"											scopeBlock="sky_material" scopeLerpName="CloudMapDensityMid"							scopeCurrentTextureName="CloudMapDensityMid" scopeNextTextureName="CloudMapDensityMidSampler"	blendMode="step"	default="Clouds_Clear_Mid_01_SKY_MID" />
+	<Texture name="cloudMapLow"											scopeBlock="sky_material" scopeLerpName="CloudMapDensityLow"							scopeCurrentTextureName="CloudMapDensityLow" scopeNextTextureName="CloudMapDensityLowSampler"	blendMode="step"	default="Clouds_Clear_Low_01_SKY_LOW" />
+	<Texture name="CloudMapNormalLow" 									scopeBlock="sky_material" scopeLerpName="CloudMapNormalLow"								scopeCurrentTextureName="CloudMapNormalLow" scopeNextTextureName="CloudMapNormalLow2"			blendMode="step"	default="Clouds_Clear_Low_01_norm_NORM" />
+
+
+	<!-- Environment: Field -->
+    <Float                  name="FieldApronNightIntensity"										scopeBlock="lighting"			 scopeName="fieldApronNightLighting"                 blendMode="linear"      default="1.00"                        uidata="-0.50,1000.00,0.01" />
+    <Vector3                name="FieldNightColor"												scopeBlock="lighting"			 scopeName="gfieldNightColor"                        blendMode="linear"      default="1.00 1.00 1.00"              uidata="-0.50,1000.00,0.01"                      editor="color"/>
+    <Float                  name="FieldSunlightMultiplier"										scopeBlock="lighting"			 scopeName="sunlightMultiplier"                      blendMode="linear"      default="1.00"                        uidata="1.00,1000.00,0.01" />
+	<Vector4                name="fieldSpecInt_specPower_lightMapPower_sunLightMultiplier"		scopeBlock="lighting"            scopeName="fieldSpecInt_specPower_lightMapPower_sunLightMultiplier"  blendMode="linear"      default="2.000 3.000 1.000 1.000"	uidata="-300.00,300.00,1.00" />
+	<Vector3                name="FieldShadowColor"												scopeBlock="lighting"            scopeName="fieldShadowColor"                        blendMode="linear"      default="0.00 0.00 0.00"            editor="color" />
+	<Vector3                name="fieldDirectColor"												scopeBlock="lighting"            scopeName="fieldDirectColor"                        blendMode="linear"      default="1.00 1.00 1.00"            editor="color" />
+	<Vector3                name="fieldDetailColor"												scopeBlock="lighting"            scopeName="fieldDetailColor"                        blendMode="linear"      default="1.00 1.00 1.00"            editor="color" />
+
+
+	<!-- Environment: Grass Fins -->
+    <!--offset spec and SS-->
+    <Vector2                name="todBoost"                                                   scopeBlock="grassrender"      scopeName="todBoost"                                blendMode="linear"      default="0.00 0.00"/>
+    <!--transition rate of SS zone-->
+    <Float                  name="SSRampPow"                                                  scopeBlock="grassrender"      scopeName="SSRampPow"                               blendMode="linear"      default="1" />
+    <!--wideness of spec zone-->
+    <Float                  name="specTight"                                                  scopeBlock="grassrender"      scopeName="specTight"                               blendMode="linear"      default="4" />
+    <!--transitions of spec into SS zones-->
+    <Float                  name="SpecSSBleed"                                                scopeBlock="grassrender"      scopeName="SpecSSBleed"                             blendMode="linear"      default="5" />
+
+    <!-- Environment: Crowd -->
+    <Float                  name="crowdLightPower"                                            scopeBlock="lighting"         scopeName="crowdLightPower"                         blendMode="linear"      default="3.0"                         uidata="0.0,100.00,0.1" />
+    <Float                  name="crowdLightScale"                                            scopeBlock="lighting"         scopeName="crowdLightScale"                         blendMode="linear"      default="60.0"                        uidata="0.0,10000.00,1.0" />
+    <Vector2                name="crowdLightAOScale"                                          scopeBlock="lighting"         scopeName="crowdLightAOScale"                       blendMode="linear"      default="1.0 1.18"/>
+    <Vector2                name="crowdLightAmbient"                                          scopeBlock="lighting"         scopeName="crowdLightAmbient"                       blendMode="linear"      default="0.35 0.5"/>
+	<Vector2                name="crowdLightAmbientSimple"                                    scopeBlock="lighting"         scopeName="crowdLightAmbientSimple"                 blendMode="linear"      default="0.35 0.5"/>
+    <Float                  name="crowdShadowContrib"                                         scopeBlock="lighting"         scopeName="crowdShadowContrib"                      blendMode="linear"      default="0.50"                        uidata="0.00,1.00,0.01" />
+	<Float                  name="crowdShadowContribSimple"                                   scopeBlock="lighting"         scopeName="crowdShadowContribSimple"                blendMode="linear"      default="0.50"                        uidata="0.00,1.00,0.01" />
+    <Float                  name="crowdAmbientMultiplier"                                     scopeBlock="lighting"         scopeName="crowdAmbientMultiplier"                  blendMode="linear"      default="1.0"                         uidata="0.0,100.00,0.1" />
+	<Vector2                name="crowdLightClamp"                               		  	  scopeBlock="lighting"         scopeName="crowdLightClamp"            				blendMode="linear"      default="0.0 1.0"/>
+	<Vector2                name="crowdLightClampSimple"                               		  scopeBlock="lighting"         scopeName="crowdLightClampSimple"            		blendMode="linear"      default="0.0 1.0"/>
+    <Vector3                name="crowdLightDirectionOffsetSimple"                            scopeBlock="lighting"         scopeName="crowdLightDirectionOffsetSimple"         blendMode="linear"      default="0.0 0.0 1.0"/>
+    <Vector3                name="crowdLightingBias"                                          scopeBlock="lighting"         scopeName="crowdLightingBias"                       blendMode="step"      default="0.35 0.35 0.35"              editor="color"/>
+    <Vector3                name="crowdLightingBiasSimple"                                    scopeBlock="lighting"         scopeName="crowdLightingBiasSimple"                 blendMode="step"      default="0.35 0.35 0.35"              editor="color"/>
+    <Vector2                name="crowdLightingBiasParams"                                    scopeBlock="lighting"         scopeName="crowdLightingBiasParams"                 blendMode="linear"      default="40.0 20.0"/>
+    <Vector2                name="crowdLightingBiasParamsSimple"                              scopeBlock="lighting"         scopeName="crowdLightingBiasParamsSimple"           blendMode="linear"      default="1000.0 1000.0"/>
+    <Float                  name="crowdNightSpecIntensity"                                    scopeBlock="lighting"         scopeName="crowdNightSpecIntensity"                 blendMode="linear"      default="0.30"                        uidata="0.00,10.00,0.01" />
+    <Vector3                name="fanExtentScaling"                                           scopeBlock="lighting"         scopeName="fanExtentScaling"                        blendMode="linear"      default="7.2 1.0 0.1"/>
+
+    <!-- Environment: Dome -->
+    <Vector3                name="DomeColor"                                                  scopeBlock="lighting"         scopeName="domeColor" 		                        blendMode="step"      default="1.000 1.000 1.000"           editor="color" />
+    <Float                  name="DomeIntensity"				                                      scopeBlock="lighting"         scopeName="domeColorIntensity"					          blendMode="linear"      default="1.00"	                      uidata="-0.50,20.00,0.01" />
+	  
+    <Boolean              name="HDRForceStaticExposure"                 scopeBlock="post"           scopeName="HDRForceStaticExposure"          blendMode="step"      default="FALSE"    />
+    <Boolean              name="HDREnableClampedExposure"               scopeBlock="post"           scopeName="HDREnableClampedExposure"        blendMode="step"      default="FALSE"    />
+
+    <Float                name="HDRExposureMax"                         scopeBlock="post"           scopeName="HDRFullExposureMax"              blendMode="linear"      default="256.00"                         uidata="0.00,4096.0,0.01" />
+    <Float                name="HDRExposureMin"                         scopeBlock="post"           scopeName="HDRFullExposureMin"              blendMode="linear"      default="0.0625"                         uidata="0.00,4096.0,0.01" />
+
+    <Float                name="HDRClampedExposureMax"                  scopeBlock="post"           scopeName="HDRClampedExposureMax"           blendMode="linear"      default="256.00"                         uidata="0.00,4096.0,0.01" />
+    <Float                name="HDRClampedExposureMin"                  scopeBlock="post"           scopeName="HDRClampedExposureMin"           blendMode="linear"      default="0.0625"                         uidata="0.0625,32.0,0.01" />
+
+    <Float                name="HDRExposureMultiplier"                  scopeBlock="post"           scopeName="HDRExposureMultiplier"           blendMode="linear"      default="1.0"      />
+
+	<Boolean              name="HDRApplyExposureWeatherMultiplier"		scopeBlock="post"           scopeName="HDRApplyExposureWeatherMultiplier"	blendMode="linear"      default="FALSE"    />
+    <Float                name="HDRExposureWeatherMultiplier"			scopeBlock="post"           scopeName="HDRExposureWeatherMultiplierInput"	blendMode="linear"      default="1.0"      />
+
+    <Float                name="HDRExposure"                            scopeBlock="post"           scopeName="HDRExposureInput"				blendMode="linear"      default="16.00"                          uidata="0.00,4096.0,0.01" />
+    <Float      		  name="skyPCLMultiplier"                       scopeBlock="tonemapping"    scopeName="skyPCLMultiplier"                blendMode="linear"      default="1.00"                           uidata="0.00,1.0,0.01"/>
+
+	<Boolean              name="applySkyPCLWeatherMultiplier"		    scopeBlock="tonemapping"    scopeName="applySkyPCLWeatherMultiplier"	blendMode="linear"      default="FALSE"    />
+    <Float                name="skyPCLWeatherMultiplier"				scopeBlock="tonemapping"    scopeName="skyPCLWeatherMultiplierInput"    blendMode="linear"      default="1.0"      />
+
+    <Float                name="HDRDesiredLum"                          scopeBlock="post"              scopeName="HDRDesiredLum"				      blendMode="linear"      default="0.60"                         uidata="0.00,4096.0,0.01" />
+    <Float                name="HDRDamping"                          scopeBlock="post"              scopeName="HDRDamping"				      blendMode="linear"      default="0.40"                         uidata="0.00,4096.0,0.01" />
+
+	<!--3D UI-->
+	<Float                  name="rayDensityMult"											  scopeBlock="temple"           scopeName="rayDensityMult"                          blendMode="step"      default="1.0"                         uidata="0.00,500.00,0.1" />
+	<Vector2                name="lightPositionOnScreen"                                      scopeBlock="temple"           scopeName="lightPositionOnScreen"                   blendMode="step"      default="0.26 0.40"					  uidata="0.00,50.00,0.01" />
+	<Vector4                name="BloomColor"		                                          scopeBlock="temple"           scopeName="bloomColor"                              blendMode="step"      default="1.000 1.000 1.000 0.00"      editor="color" />
+	<Float                  name="BloomExposure"											  scopeBlock="temple"           scopeName="exposure"                                blendMode="step"      default="0.0"                         uidata="0.00,500.00,0.1" />
+	<Float                  name="BloomDecay"												  scopeBlock="temple"           scopeName="decay"									blendMode="step"      default="1.0"                         uidata="0.00,500.00,0.1" />
+	<Float                  name="BloomDensity"												  scopeBlock="temple"           scopeName="density"									blendMode="step"      default="0.25"                        uidata="0.00,500.00,0.1" />
+	<Float                  name="BloomWeight"												  scopeBlock="temple"           scopeName="weight"									blendMode="step"      default="4.0"                         uidata="0.00,500.00,0.1" />
+	<Float                  name="BloomThreshold"											  scopeBlock="temple"           scopeName="bloomThreshold"                          blendMode="step"      default="0.28"                        uidata="0.00,50.00,0.01" />
+	<Float                  name="BloomMax"													  scopeBlock="temple"           scopeName="bloomMax"								blendMode="step"      default="1.00"                        uidata="0.00,50.00,0.01" />
+	<Float                  name="UIfadeHeight"												  scopeBlock="temple"           scopeName="UIfadeHeight"							blendMode="step"      default="0.25"                        uidata="0.00,50.00,0.01" />
+	<Float                  name="UIfadeDistMultiplier"										  scopeBlock="temple"           scopeName="UIfadeDistMultiplier"                    blendMode="step"      default="1.00"                        uidata="0.00,50.00,0.01" />
+	<Float                  name="UIfadeDistOffset"											  scopeBlock="temple"           scopeName="UIfadeDistOffset"                        blendMode="step"      default="0.00"                        uidata="-50.00,50.00,0.01" />
+	<Vector3                name="UIfadeColor"												  scopeBlock="temple"           scopeName="UIfadeColor"								blendMode="step"      default="0.95 0.75 0.55"              editor="color" />
+
+    <!-- VFX Lights -->
+	<!-- Sun version of cross / glow / halo / flare -->
+	<Vector4                name="SunCrossTint" 								scopeBlock="lighting"             scopeName="gSunCrossTint"								blendMode="step"            default="0.980 1.000 0.670 0.50"         editor="color"  />
+	<Vector4                name="SunCrossTintRandom" 							scopeBlock="lighting"             scopeName="gSunCrossTintRandom"                       blendMode="linear"            default="0.0 0.0 0.0 0.0"         editor="color"  />
+	<Float                  name="SunCrossScale" 								scopeBlock="lighting"             scopeName="gSunCrossScale"                            blendMode="linear"            default="1.0"       		    		  uidata="0.00,50.00,0.01" />
+	<Float                  name="SunCrossScaleRandom" 						scopeBlock="lighting"             scopeName="gSunCrossScaleRandom"							blendMode="linear"            default="0.0"       		    		  uidata="0.00,50.00,0.01" />
+	<Float                  name="SunCrossBloom" 								scopeBlock="lighting"             scopeName="gSunCrossBloom"                            blendMode="linear"            default="2.0"       		    		  uidata="0.00,200.00,0.01" />
+	<Float                  name="SunCrossBloomSpread"							scopeBlock="lighting"             scopeName="gSunCrossBloomSpread"                      blendMode="linear"            default="0.25"       		    		  uidata="0.00,50.00,0.01" />
+	<Float                  name="SunCrossBloomPower" 							scopeBlock="lighting"             scopeName="gSunCrossBloomPower"                       blendMode="linear"            default="4.0"       		    		  uidata="0.00,50.00,0.01" />
+	<Float                  name="SunCrossOrientation" 						scopeBlock="lighting"             scopeName="gSunCrossOrientation"							blendMode="linear"            default="0.72"       		    		  uidata="0.00,50.00,0.01" />
+	<Float                  name="SunCrossRotation" 							scopeBlock="lighting"             scopeName="gSunCrossRotation"                         blendMode="linear"            default="1.0"       		    		  uidata="0.00,50.00,0.01" />
+	<Float	                name="SunCrossNum" 								scopeBlock="lighting"             scopeName="gSunCrossNum"									blendMode="step"            default="4.0"       		    		  uidata="1.00,200.00,1.00" />
+	<Float	                name="SunCrossStretch" 							scopeBlock="lighting"             scopeName="gSunCrossStretch"								blendMode="linear"            default="4.0"       		    	      uidata="1.00,200.00,1.00" />
+
+	<Vector4                name="SunGlowTint" 								scopeBlock="lighting"             scopeName="gSunGlowTint"									blendMode="step"            default="0.800 0.750 0.800 0.95"         editor="color"  />
+	<Vector4                name="SunGlowTintRandom" 							scopeBlock="lighting"             scopeName="gSunGlowTintRandom"                        blendMode="linear"            default="0.0 0.0 0.0 0.0"         editor="color"  />
+	<Float                  name="SunGlowScale" 								scopeBlock="lighting"             scopeName="gSunGlowScale"                             blendMode="linear"            default="1.0"       		    		  uidata="0.00,50.00,0.01" />
+	<Float                  name="SunGlowScaleRandom" 							scopeBlock="lighting"             scopeName="gSunGlowScaleRandom"                       blendMode="linear"            default="0.0"       		    		  uidata="0.00,50.00,0.01" />
+	<Float                  name="SunGlowBloom" 								scopeBlock="lighting"             scopeName="gSunGlowBloom"                             blendMode="linear"            default="4.0"       		    		  uidata="0.00,50.00,0.01" />
+	<Float                  name="SunGlowBloomSpread" 				    		scopeBlock="lighting"             scopeName="gSunGlowBloomSpread"                       blendMode="linear"            default="0.6"       		    		  uidata="0.00,50.00,0.01" />
+	<Float                  name="SunGlowBloomPower" 							scopeBlock="lighting"             scopeName="gSunGlowBloomPower"                        blendMode="linear"            default="0.4"       		    		  uidata="0.00,50.00,0.01" />
+
+	<Vector4                name="SunHaloTint" 								scopeBlock="lighting"             scopeName="gSunHaloTint"                              blendMode="step"            default="0.980 0.750 0.670 0.30"         editor="color"  />
+	<Vector4                name="SunHaloTintRandom" 							scopeBlock="lighting"             scopeName="gSunHaloTintRandom"                        blendMode="linear"            default="0.0 0.0 0.0 0.0"         editor="color"  />
+	<Float                  name="SunHaloScale" 								scopeBlock="lighting"             scopeName="gSunHaloScale"                             blendMode="linear"            default="2.0"       		    		  uidata="0.00,100.00,0.01" />
+	<Float                  name="SunHaloScaleRandom" 							scopeBlock="lighting"             scopeName="gSunHaloScaleRandom"                       blendMode="linear"            default="0.0"       		    		  uidata="0.00,50.00,0.01" />
+	<Float                  name="SunHaloBloom" 								scopeBlock="lighting"             scopeName="gSunHaloBloom"                             blendMode="linear"            default="12.0"       		    		  uidata="1,200,1" />
+	<Float                  name="SunHaloBloomPower" 							scopeBlock="lighting"             scopeName="gSunHaloBloomPower"                        blendMode="linear"            default="3.0"       		    		  uidata="1,200,1" />
+
+	<Vector4                name="SunFlareTint" 								scopeBlock="lighting"             scopeName="gSunFlareTint"                             blendMode="step"            default="0.780 0.770 0.650 0.5"         editor="color"  />
+	<Vector4                name="SunFlareTintRandom" 							scopeBlock="lighting"             scopeName="gSunFlareTintRandom"                       blendMode="linear"            default="0.33 0.33 0.33 0.0"         editor="color"  />
+	<Float                  name="SunFlareScale" 								scopeBlock="lighting"             scopeName="gSunFlareScale"                            blendMode="linear"            default="1.0"       		    		  uidata="0.00,50.00,0.01" />
+	<Float                  name="SunFlareScaleRandom" 						    scopeBlock="lighting"             scopeName="gSunFlareScaleRandom"                      blendMode="linear"            default="0.0"       		    		  uidata="0.00,500.00,0.01" />
+	<Float                  name="SunFlareBloom" 								scopeBlock="lighting"             scopeName="gSunFlareBloom"                            blendMode="linear"            default="0.0"       		    		  uidata="0.00,500.00,0.01" />
+	<Float                  name="SunFlareBloomPower" 							scopeBlock="lighting"             scopeName="gSunFlareBloomPower"                       blendMode="linear"            default="50.0"       		    		  uidata="0.00,500.00,0.01" />
+	<Float                  name="SunFlareMovementRate"  						scopeBlock="lighting"             scopeName="gSunFlareMovementRate"                     blendMode="linear"            default="0.0"       		    		  uidata="0.00,50.00,0.01" />
+	<Float                  name="SunFlareDistanceSeperation"  				    scopeBlock="lighting"             scopeName="gSunFlareDistanceSeperation"               blendMode="linear"            default="5.0"       		    		  uidata="0.00,50.00,0.01" />
+	<Float                  name="SunFlareSizeSeperation"  		        	    scopeBlock="lighting"             scopeName="gSunFlareSizeSeperation"                   blendMode="linear"            default="1.0"       		    		  uidata="0.00,50.00,0.01" />
+	
+	<!-- Artificial version of cross / glow / halo / flare -->
+	<Vector4                name="CrossTint" 								    scopeBlock="lighting"             scopeName="gCrossTint"                             blendMode="step"      default="0.980 1.000 0.670 0.50"         editor="color"  />
+    <Vector4                name="CrossTintRandom" 							scopeBlock="lighting"             scopeName="gCrossTintRandom"                       blendMode="linear"      default="0.050 0.100 0.100 0.05"         editor="color"  />
+    <Float                  name="CrossScale" 								  scopeBlock="lighting"             scopeName="gCrossScaleInput"                            blendMode="linear"      default="1.0"       		    		  uidata="0.00,50.00,0.01" />
+    <Float                  name="CrossScaleMultiplier"                     scopeBlock="lighting"             scopeName="gCrossScaleMultiplier"                  blendMode="linear"      default="1.0"                             uidata="0.00,1.00,0.01" />
+    <Float                  name="CrossScaleRandom" 						scopeBlock="lighting"             scopeName="gCrossScaleRandom"                      blendMode="linear"      default="0.5"       		    		  uidata="0.00,50.00,0.01" />
+    <Float                  name="CrossBloom" 								  scopeBlock="lighting"             scopeName="gCrossBloom"                            blendMode="linear"      default="2.0"       		    		  uidata="0.00,50.00,0.01" />
+    <Float                  name="CrossBloomSpread"							scopeBlock="lighting"             scopeName="gCrossBloomSpread"                      blendMode="linear"      default="0.25"       		    		  uidata="0.00,50.00,0.01" />
+    <Float                  name="CrossBloomPower" 							scopeBlock="lighting"             scopeName="gCrossBloomPower"                       blendMode="linear"      default="4.0"       		    		  uidata="0.00,50.00,0.01" />
+    <Float                  name="CrossOrientation" 						scopeBlock="lighting"             scopeName="gCrossOrientation"                      blendMode="linear"      default="0.72"       		    		  uidata="0.00,50.00,0.01" />
+    <Float                  name="CrossRotation" 							  scopeBlock="lighting"             scopeName="gCrossRotation"                         blendMode="linear"      default="1.0"       		    		  uidata="0.00,50.00,0.01" />
+    <Float	                name="CrossNum" 								    scopeBlock="lighting"             scopeName="gCrossNum"                              blendMode="step"      default="3.0"       		    		  uidata="1.00,4.00,1.00" />
+	<Float	                name="CrossStretch" 							  scopeBlock="lighting"             scopeName="gCrossStretch"                          blendMode="linear"      default="8.0"       		    	      uidata="1.00,50.00,1.00" />
+
+    <Vector4                name="GlowTint" 								    scopeBlock="lighting"             scopeName="gGlowTint"                              blendMode="step"      default="0.800 0.750 0.800 0.95"         editor="color"  />
+    <Vector4                name="GlowTintRandom" 							scopeBlock="lighting"             scopeName="gGlowTintRandom"                        blendMode="linear"      default="0.100 0.100 0.100 0.10"         editor="color"  />
+    <Float                  name="GlowScale" 								    scopeBlock="lighting"             scopeName="gGlowScaleInput"                             blendMode="linear"      default="1.0"       		    		  uidata="0.00,50.00,0.01" />
+    <Float                  name="GlowScaleMultiplier"                     scopeBlock="lighting"             scopeName="gGlowScaleMultiplier"                  blendMode="linear"      default="1.0"                             uidata="0.00,1.00,0.01" />
+    <Float                  name="GlowScaleRandom" 							scopeBlock="lighting"             scopeName="gGlowScaleRandom"                       blendMode="linear"      default="0.5"       		    		  uidata="0.00,50.00,0.01" />
+    <Float                  name="GlowBloom" 								    scopeBlock="lighting"             scopeName="gGlowBloom"                             blendMode="linear"      default="4.0"       		    		  uidata="0.00,50.00,0.01" />
+    <Float                  name="GlowBloomSpread" 				      scopeBlock="lighting"             scopeName="gGlowBloomSpread"                       blendMode="linear"      default="0.6"       		    		  uidata="0.00,50.00,0.01" />
+    <Float                  name="GlowBloomPower" 							scopeBlock="lighting"             scopeName="gGlowBloomPower"                        blendMode="linear"      default="4.0"       		    		  uidata="0.00,50.00,0.01" />
+	
+    <Vector4                name="HaloTint" 								    scopeBlock="lighting"             scopeName="gHaloTint"                              blendMode="step"      default="0.980 0.750 0.670 0.30"         editor="color"  />
+    <Vector4                name="HaloTintRandom" 							scopeBlock="lighting"             scopeName="gHaloTintRandom"                        blendMode="linear"      default="0.050 0.100 0.100 0.05"         editor="color"  />
+    <Float                  name="HaloScale" 								    scopeBlock="lighting"             scopeName="gHaloScaleInput"                             blendMode="linear"      default="2.0"       		    		  uidata="0.00,50.00,0.01" />
+    <Float                  name="HaloScaleMultiplier"                     scopeBlock="lighting"             scopeName="gHaloScaleMultiplier"                  blendMode="linear"      default="1.0"                             uidata="0.00,1.00,0.01" />
+    <Float                  name="HaloScaleRandom" 							scopeBlock="lighting"             scopeName="gHaloScaleRandom"                       blendMode="linear"      default="0.2"       		    		  uidata="0.00,50.00,0.01" />
+    <Float                  name="HaloBloom" 								    scopeBlock="lighting"             scopeName="gHaloBloom"                             blendMode="linear"      default="12.0"       		    		  uidata="1,40,1" />
+    <Float                  name="HaloBloomPower" 							scopeBlock="lighting"             scopeName="gHaloBloomPower"                        blendMode="linear"      default="3.0"       		    		  uidata="1,40,1" />
+	
+    <Vector4                name="FlareTint" 								    scopeBlock="lighting"             scopeName="gFlareTint"                             blendMode="step"      default="0.480 0.300 0.670 0.1"         editor="color"  />
+    <Vector4                name="FlareTintRandom" 							scopeBlock="lighting"             scopeName="gFlareTintRandom"                       blendMode="linear"      default="0.300 0.300 0.300 0.1"         editor="color"  />
+    <Float                  name="FlareScale" 								  scopeBlock="lighting"             scopeName="gFlareScaleInput"                            blendMode="linear"      default="1.0"       		    		  uidata="0.00,50.00,0.01" />
+    <Float                  name="FlareScaleMultiplier"                     scopeBlock="lighting"             scopeName="gFlareScaleMultiplier"                  blendMode="linear"      default="1.0"                             uidata="0.00,1.00,0.01" />
+    <Float                  name="FlareScaleRandom" 						scopeBlock="lighting"             scopeName="gFlareScaleRandom"                      blendMode="linear"      default="5.0"       		    		  uidata="0.00,50.00,0.01" />
+    <Float                  name="FlareBloom" 								  scopeBlock="lighting"             scopeName="gFlareBloom"                            blendMode="linear"      default="10.0"       		    		  uidata="0.00,50.00,0.01" />
+    <Float                  name="FlareBloomPower" 							scopeBlock="lighting"             scopeName="gFlareBloomPower"                       blendMode="linear"      default="50.0"       		    		  uidata="0.00,50.00,0.01" />
+    <Float                  name="FlareMovementRate"  					scopeBlock="lighting"              scopeName="gFlareMovementRate"                     blendMode="linear"      default="2.2"       		    		  uidata="0.00,50.00,0.01" />   	
+
+    <Vector4                name="VbeamTint" 								    scopeBlock="lighting"             scopeName="gVbeamTint"                             blendMode="step"      default="0.970 1.000 0.670 0.15"          editor="color"  />
+    <Float                  name="VbeamSpread" 								  scopeBlock="lighting"             scopeName="gVbeamSpread"                           blendMode="linear"      default="0.4"       		    		  uidata="0.00,50.00,0.01" />
+    <Float                  name="VbeamLength" 								  scopeBlock="lighting"             scopeName="gVbeamLength"                           blendMode="linear"      default="60.0"       		    		  uidata="0.00,500.00,0.01" />	
+
+	  <!-- VFX / POST: LUT -->
+    <Texture                name="LUT"                                                      scopeBlock="lut"        scopeLerpName="LutDelta"                              blendMode="step"      default="LUT_default.dds"                       scopeCurrentTextureName="texture1"            scopeNextTextureName="texture2" />
+
+    <!-- VFX / POST: Fog -->
+    <Boolean                name="UseHeightFog"                                             scopeBlock="post"       scopeName="useHeightFog"                              blendMode="step"      default="FALSE"                                                                     />
+    <Vector3                name="FogHeightColor"                                           scopeBlock="post"       scopeName="fogHeightColor"                            blendMode="linear"      default="0.9 0.9 0.9"                                              editor="color"   />
+    <Float                  name="FogHeightStart"                                           scopeBlock="post"       scopeName="fogHeightStart"                            blendMode="linear"      default="0.0"                                                      uidata="-50.0, 1000.0, 1.0" />
+    <Float                  name="FogHeightEnd"                                             scopeBlock="post"       scopeName="fogHeightEnd"                              blendMode="linear"      default="9.0"                                                      uidata="0.0, 1000.0, 1.0" />
+    <Vector3                name="FogDepthColor"                                            scopeBlock="post"       scopeName="fogDepthColor"                             blendMode="linear"      default="0.9 0.9 0.9"                                              editor="color" />
+    <Float                  name="FogDepthStart"                                            scopeBlock="post"       scopeName="fogDepthStart"                             blendMode="linear"      default="0.0"                                                      uidata="-50.0,1000.00,1.0" />
+    <Float                  name="FogDepthEnd"                                              scopeBlock="post"       scopeName="fogDepthEnd"                               blendMode="linear"      default="9.0"                                                      uidata="0.0,1000.00,1.0" />
+        <!-- VFX / POST: Haze -->
+    <Boolean                name="useHaze"                                                  scopeBlock="post"       scopeName="useHaze"                                   blendMode="step"      default="FALSE"                                                                   />
+    <Vector3                name="HazeColor"                                                scopeBlock="post"       scopeName="HazeColor"                                 blendMode="step"      default="0.7 0.3 0.1"                                              editor="color" />
+    <Vector3                name="HazeFalloff"                                              scopeBlock="post"       scopeName="HazeFalloff"                               blendMode="linear"      default="0.0 1.0 1.0"                                              uidata="0.0,10.00,0.05" />
+    <Vector3                name="HazeMinMaxScale"                                          scopeBlock="post"       scopeName="HazeMinMaxScale"                           blendMode="linear"      default="20.0 1.0 0.0"                                             uidata="0.0, 1000.0, 1.0" />      
+    
+    <!-- NOT TO BE KEYFRAMED -->
+	<!--WARNING: THE FOLLOWING PARAMETERS NEED TO BE REMOVED FROM ALL BLE FILES
+    <SphericalHarmonic      name="RotatedPlayerSH"                                          scopeBlock="lighting"   scopeName="gRotatedPlayerSH"                          blendMode="step"      default="SH_clearCloudy_1230_onField_G.sha" />
+    <SphericalHarmonic      name="RotatedEnvironmenttSH"                                    scopeBlock="lighting"   scopeName="gRotatedEnvironmentSH"                     blendMode="step"      default="SH_clearCloudy_1230_Global.sha" />-->
+
+</VariableList>
+
+  <OperationList>
+    <Operation              name="Operation"    priority="0"            operation="Select"  numOperands="3"         alwaysUpdate="1">
+      <ScopeOperand         type="bool"         block="lighting"        name="OffFieldLighting" />
+      <ScopeOperand         type="vector4"      block="lighting"        name="gSelfShadowBiasDefault" />
+      <ScopeOperand         type="vector4"      block="lighting"        name="gSelfShadowBiasExterior" />
+      <ScopeResult          type="vector4"      block="lighting"        name="gSelfShadowBias_XenonHelmet_Face" />
+    </Operation>
+    <!-- Multiply the result of gSelfShadowBias (face) by 0.01-->
+    <Operation              name="Operation"    priority="0"            operation="Multiply"                        alwaysUpdate="1">
+      <ConstantOperand      type="float"        value="0.01" />
+      <ScopeMapOperand      type="float">
+        <ScopeMap           type="vector4"      block="lighting"        name="gSelfShadowBias_XenonHelmet_Face"   component="y" />
+      </ScopeMapOperand>
+      <ScopeMapResult       type="float">
+        <ScopeMap           type="vector4"      block="lighting"        name="gSelfShadowBias_XenonHelmet_Face"   component="y"/>
+      </ScopeMapResult>
+    </Operation>
+    <Operation              name="Operation"    priority="0"            operation="Select"  numOperands="3"         alwaysUpdate="1">
+      <ScopeOperand         type="bool"         block="lighting"        name="OffFieldLighting" />
+      <ScopeOperand         type="sh"           block="lighting"        name="gPlayerSH_Default" />
+      <ScopeOperand         type="sh"           block="lighting"        name="gPlayerSH_Exterior" />
+      <ScopeResult          type="sh"           block="lighting"        name="gPlayerSH" />
+    </Operation>   
+    <Operation              name="Operation"    priority="0"            operation="Select"  numOperands="3"         alwaysUpdate="1">
+      <ScopeOperand         type="float"        block="presentation"    name="lutSelect" />
+      <ScopeOperand         type="vector4"      block="lighting"        name="gXpDirectYpAmbientZeDirectWeAmbient" />
+      <ScopeOperand         type="vector4"      block="lighting"        name="gXpDirectYpAmbientZeDirectWeAmbientGameplay" />
+      <ScopeResult          type="vector4"      block="lighting"        name="gXpDirectYpAmbientZeDirectWeAmbient" />
+    </Operation>
+    <Operation              name="Operation"    priority="0"            operation="Select"  numOperands="3"         alwaysUpdate="1">
+      <ScopeOperand         type="float"        block="presentation"    name="lutSelect" />
+      <ScopeOperand         type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScaleRef" />
+      <ScopeOperand         type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScaleRefGameplay" />
+      <ScopeResult          type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScaleRef" />
+    </Operation>
+      <!-- Took out some unecessary shader math from the Post Effects in FogScatter and moved into the operations manager-->
+    <Operation              name="Operation"    priority="0"        operation="Subtract"    alwaysUpdate="1">
+      <ScopeOperand         type="float"        block="post"        name="fogDepthEnd" /> 
+      <ScopeOperand         type="float"        block="post"        name="fogDepthStart" /> 
+      <ScopeResult          type="float"        block="post"        name="fogDepthScale" />
+    </Operation>
+    <!-- Took out some unecessary shader math from the Post Effects in FogScatter and moved into the operations manager-->
+    <Operation              name="Operation"    priority="0"        operation="Subtract"    alwaysUpdate="1">
+      <ScopeOperand         type="float"        block="post"        name="fogHeightEnd" />
+      <ScopeOperand         type="float"        block="post"        name="fogHeightStart" />
+      <ScopeResult          type="float"        block="post"        name="fogHeightScale" />
+    </Operation>
+    <!-- Took out some unecessary shader math from the Post Effects in FogScatter and moved into the operations manager-->
+    <Operation              name="Operation"    priority="0"        operation="Subtract"    alwaysUpdate="1">
+      <ScopeMapOperand      type="float">
+          <ScopeMap         type="vector3"      block="post"        name="HazeFalloff"      component="y" />
+      </ScopeMapOperand>
+      <ScopeMapOperand      type="float">
+          <ScopeMap         type="vector3"      block="post"        name="HazeFalloff"      component="x" />
+      </ScopeMapOperand>
+      <ScopeMapResult       type="float">
+          <ScopeMap         type="vector3"      block="post"        name="HazeFalloff"      component="z"/>
+      </ScopeMapResult>
+    </Operation>    
+    <!-- BallContactShadowColor  -->
+    <Operation            name="Operation"    priority="0"                 operation="Add"                alwaysUpdate="1">
+      <ScopeMapOperand    type="float">
+        <ScopeMap         type="vector4"      block="lighting_uimapping"   name="gPlyAoBallShadowColor"   component="x"/>
+      </ScopeMapOperand>
+      <ConstantOperand    type="float"        value="0.0" />
+      <ScopeMapResult     type="float">
+        <ScopeMap         type="vector4"      block="shadows"              name="aoBallShadowColor"       component="x" />
+      </ScopeMapResult>
+    </Operation>
+    <Operation            name="Operation"    priority="0"                 operation="Add"                alwaysUpdate="1">
+      <ScopeMapOperand    type="float">
+        <ScopeMap         type="vector4"      block="lighting_uimapping"   name="gPlyAoBallShadowColor"   component="y"/>
+      </ScopeMapOperand>
+      <ConstantOperand    type="float"        value="0.0" />
+      <ScopeMapResult     type="float">
+        <ScopeMap         type="vector4"      block="shadows"              name="aoBallShadowColor"       component="y" />
+      </ScopeMapResult>
+    </Operation>
+    <Operation            name="Operation"    priority="0"                 operation="Add"                alwaysUpdate="1">
+      <ScopeMapOperand    type="float">
+        <ScopeMap         type="vector4"      block="lighting_uimapping"   name="gPlyAoBallShadowColor"   component="z"/>
+      </ScopeMapOperand>
+      <ConstantOperand    type="float"        value="0.0" />
+      <ScopeMapResult     type="float">
+        <ScopeMap         type="vector4"      block="shadows"              name="aoBallShadowColor"       component="z" />
+      </ScopeMapResult>
+    </Operation>
+    <!-- BallContactShadowIntensity  -->
+    <Operation            name="Operation"    priority="0"                 operation="Add"                alwaysUpdate="1">
+      <ScopeOperand       type="float"        block="lighting_uimapping"   name="gPlyAoBallShadowInt" />
+      <ConstantOperand    type="float"        value="0.0" />
+      <ScopeMapResult     type="float">
+        <ScopeMap         type="vector4"      block="shadows"              name="aoBallShadowColor"       component="w" />
+      </ScopeMapResult>
+    </Operation>
+    <!-- Copy over the W component (the XYZ will be copied in the following rotation operation) -->
+    <Operation          name="TransferNightValue" priority="0"           operation="Add"   alwaysUpdate="1">
+      <ScopeMapOperand  type="float">
+        <ScopeMap       type="vector4"      block="lighting"             name="gXYZLightDirWenvNightScaleRef"    component="w" />
+      </ScopeMapOperand>
+      <ConstantOperand  type="float"        value="0.0" />
+      <ScopeMapResult   type="float">
+        <ScopeMap       type="vector4"      block="lighting"             name="gXYZLightDirWenvNightScale"       component="w" />
+      </ScopeMapResult>
+    </Operation>
+    <!-- Use the azimuth provided by the game to rotate the sky light direction  -->
+    <Operation              name="RotateSkyLightDirection"    priority="0" operation="RotateY"                     alwaysUpdate="1">
+      <ScopeOperand         type="float"        block="global"          name="azimuthValue" />
+      <ScopeMapOperand      type="vector3">
+        <ScopeMap           type="vector3"      block="sky_material"        name="skyLightDirRef"    component="x" />
+        <ScopeMap           type="vector3"      block="sky_material"        name="skyLightDirRef"    component="y" />
+        <ScopeMap           type="vector3"      block="sky_material"        name="skyLightDirRef"    component="z" />
+      </ScopeMapOperand>
+      <ScopeMapResult       type="vector3">
+        <ScopeMap           type="vector3"      block="sky_material"        name="skyLightDir"       component="x" />
+        <ScopeMap           type="vector3"      block="sky_material"        name="skyLightDir"       component="y" />
+        <ScopeMap           type="vector3"      block="sky_material"        name="skyLightDir"       component="z" />
+      </ScopeMapResult>
+    </Operation>
+	
+	<!-- Use the azimuth provided by the game to rotate the sun location -->
+    <Operation              name="RotateLightDirection"    priority="0" operation="RotateY"                     alwaysUpdate="1">
+      <ScopeOperand         type="float"        block="global"          name="azimuthValue" />
+      <ScopeMapOperand      type="vector3">
+        <ScopeMap           type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScaleRef"    component="x" />
+        <ScopeMap           type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScaleRef"    component="y" />
+        <ScopeMap           type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScaleRef"    component="z" />
+      </ScopeMapOperand>
+      <ScopeMapResult       type="vector3">
+        <ScopeMap           type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScale"       component="x" />
+        <ScopeMap           type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScale"       component="y" />
+        <ScopeMap           type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScale"       component="z" />
+      </ScopeMapResult>
+    </Operation>
+    <!-- Calculate the "calculated azimuth" that the sun is entering the stadium based on the directional light vector from the artists -->
+    <!-- This will be used to rotate the skydome in the game and nothing else -->
+    <Operation              name="Operation"    priority="0"            operation="ArcTan2"                     alwaysUpdate="1">
+      <ScopeMapOperand      type="float">
+        <ScopeMap           type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScale"       component="x" />
+      </ScopeMapOperand>
+      <ScopeMapOperand      type="float">
+        <ScopeMap           type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScale"       component="z" />
+      </ScopeMapOperand>
+      <ScopeResult          type="float"        block="global"        name="gCalculatedAzimuth" />
+    </Operation>
+    <!-- Rotate and optimize the Environment SH -->
+    <Operation              name="Operation"    priority="0"            operation="RotateSH"                    alwaysUpdate="1">
+      <ScopeOperand         type="float"        block="global"          name="gCalculatedAzimuth" />
+      <ScopeOperand         type="sh"           block="lighting"        name="gEnvironmentSH" />
+      <ScopeResult          type="sh"           block="lighting"        name="gRotatedEnvironmentSH" />
+    </Operation>
+    <Operation              name="Operation"    priority="0"            operation="OptimizeSH"                  alwaysUpdate="1">
+      <ScopeOperand         type="sh"           block="lighting"        name="gRotatedEnvironmentSH" />
+      <ScopeResult          type="sh"           block="lighting"        name="gRotatedEnvironmentSH" />
+    </Operation>
+    <!-- Rotate and optimize the Player SH -->
+    <Operation              name="Operation"    priority="0"            operation="RotateSH"                    alwaysUpdate="1">
+      <ScopeOperand         type="float"        block="global"          name="gCalculatedAzimuth" />
+      <ScopeOperand         type="sh"           block="lighting"        name="gPlayerSH" />
+      <ScopeResult          type="sh"           block="lighting"        name="gRotatedPlayerSH" />
+    </Operation>
+    <Operation              name="Operation"    priority="0"            operation="OptimizeSH"                  alwaysUpdate="1">
+      <ScopeOperand         type="sh"           block="lighting"        name="gRotatedPlayerSH" />
+      <ScopeResult          type="sh"           block="lighting"        name="gRotatedPlayerSH" />
+    </Operation>
+    <!-- Normalize the light direction so it can be removed from shaders -->
+    <Operation              name="Operation"    priority="0"            operation="Normalize"                   alwaysUpdate="1">
+      <ScopeMapOperand      type="vector3">
+          <ScopeMap         type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScale"       component="x" />
+          <ScopeMap         type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScale"       component="y" />
+          <ScopeMap         type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScale"       component="z" />
+      </ScopeMapOperand>
+      <ScopeMapResult       type="vector3">
+          <ScopeMap         type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScale"       component="x" />
+          <ScopeMap         type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScale"       component="y" />
+          <ScopeMap         type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScale"       component="z" />
+      </ScopeMapResult>
+    </Operation>
+    <Operation              name="Operation"    priority="0"            operation="Normalize"               alwaysUpdate="1">
+        <ScopeOperand      type="vector3" block="sky_material"        name="skyLightDir" />
+        <ScopeResult       type="vector3" block="sky_material"        name="skyLightDir" />
+    </Operation>
+    <Operation              name="Operation"    priority="0"            operation="Normalize"               alwaysUpdate="1">
+        <ScopeOperand      type="vector3" block="lighting"        name="gPlayerDirectLight2" />
+        <ScopeResult       type="vector3" block="lighting"        name="gPlayerDirectLight2" />
+    </Operation>
+    <Operation              name="Operation"    priority="0"            operation="Normalize"               alwaysUpdate="1">
+        <ScopeOperand      type="vector3" block="lighting"        name="gPlayerDirectLight3" />
+        <ScopeResult       type="vector3" block="lighting"        name="gPlayerDirectLight3" />
+    </Operation>
+    <Operation              name="Operation"    priority="0"            operation="Normalize"               alwaysUpdate="1">
+        <ScopeOperand      type="vector3" block="lighting"        name="gPlayerDirectLight4" />
+        <ScopeResult       type="vector3" block="lighting"        name="gPlayerDirectLight4" />
+    </Operation>
+    <Operation              name="Operation"    priority="0"            operation="Multiply"                      alwaysUpdate="1">
+        <ScopeMapOperand    type="float">
+            <ScopeMap       type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScale"         component="w" />
+        </ScopeMapOperand>
+
+        <ScopeMapOperand    type="float">
+            <ScopeMap       type="vector4"      block="lighting"        name="gDirectVertColorTint_AOIntensity"   component="x" />
+        </ScopeMapOperand>
+                    
+        <ScopeMapResult     type="float">
+            <ScopeMap       type="vector4"      block="lighting"        name="gDiffuseVertColorTint_AOIntensity"  component="x" />
+        </ScopeMapResult>
+    </Operation>
+    <Operation              name="Operation"    priority="0"            operation="Multiply"                      alwaysUpdate="1">
+        <ScopeMapOperand    type="float">
+            <ScopeMap       type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScale"         component="w" />
+        </ScopeMapOperand>
+
+        <ScopeMapOperand    type="float">
+            <ScopeMap       type="vector4"      block="lighting"        name="gDirectVertColorTint_AOIntensity"   component="y" />
+        </ScopeMapOperand>
+                    
+        <ScopeMapResult     type="float">
+            <ScopeMap       type="vector4"      block="lighting"        name="gDiffuseVertColorTint_AOIntensity"  component="y" />
+        </ScopeMapResult>
+    </Operation>
+    <Operation              name="Operation"    priority="0"            operation="Multiply"                      alwaysUpdate="1">
+        <ScopeMapOperand    type="float">
+            <ScopeMap       type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScale"         component="w" />
+        </ScopeMapOperand>
+
+        <ScopeMapOperand    type="float">
+            <ScopeMap       type="vector4"      block="lighting"        name="gDirectVertColorTint_AOIntensity"   component="z" />
+        </ScopeMapOperand>
+                    
+        <ScopeMapResult     type="float">
+            <ScopeMap       type="vector4"      block="lighting"        name="gDiffuseVertColorTint_AOIntensity"  component="z" />
+        </ScopeMapResult>
+    </Operation>
+    <Operation              name="Operation"    priority="0"            operation="Multiply"                      alwaysUpdate="1">
+        <ScopeMapOperand    type="float">
+            <ScopeMap       type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScale"         component="w" />
+        </ScopeMapOperand>
+
+        <ScopeMapOperand    type="float">
+            <ScopeMap       type="vector4"      block="lighting"        name="gBackgroundVertColorTint"           component="x" />
+        </ScopeMapOperand>
+
+        <ScopeMapResult     type="float">
+            <ScopeMap       type="vector4"      block="lighting"        name="gExteriorVertColorTint"             component="x" />
+        </ScopeMapResult>
+    </Operation>
+    <Operation              name="Operation"    priority="0"            operation="Multiply"                      alwaysUpdate="1">
+        <ScopeMapOperand    type="float">
+            <ScopeMap       type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScale"         component="w" />
+        </ScopeMapOperand>
+        <ScopeMapOperand    type="float">
+            <ScopeMap       type="vector4"      block="lighting"        name="gBackgroundVertColorTint"           component="y" />
+        </ScopeMapOperand>
+        <ScopeMapResult     type="float">
+            <ScopeMap       type="vector4"      block="lighting"        name="gExteriorVertColorTint"             component="y" />
+        </ScopeMapResult>
+    </Operation>
+    <Operation              name="Operation"    priority="0"            operation="Multiply"                      alwaysUpdate="1">
+        <ScopeMapOperand    type="float">
+            <ScopeMap       type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScale"         component="w" />
+        </ScopeMapOperand>
+        <ScopeMapOperand    type="float">
+            <ScopeMap       type="vector4"      block="lighting"        name="gBackgroundVertColorTint"           component="z" />
+        </ScopeMapOperand>
+        <ScopeMapResult     type="float">
+            <ScopeMap       type="vector4"      block="lighting"        name="gExteriorVertColorTint"             component="z" />
+        </ScopeMapResult>
+    </Operation>
+    <Operation              name="Operation"    priority="0"            operation="Multiply"                      alwaysUpdate="1">
+        <ScopeMapOperand    type="float">
+            <ScopeMap       type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScale"         component="w" />
+        </ScopeMapOperand>
+        <ScopeMapOperand    type="float">
+            <ScopeMap       type="vector3"      block="lighting"        name="gfieldNightColor"                   component="x" />
+        </ScopeMapOperand>
+        <ScopeMapResult     type="float">
+            <ScopeMap       type="vector3"      block="lighting"        name="fieldNightColor"                    component="x" />
+        </ScopeMapResult>
+    </Operation>
+    <Operation              name="Operation"    priority="0"            operation="Multiply"                      alwaysUpdate="1">
+        <ScopeMapOperand    type="float">
+            <ScopeMap       type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScale"         component="w" />
+        </ScopeMapOperand>
+        <ScopeMapOperand    type="float">
+            <ScopeMap       type="vector3"      block="lighting"        name="gfieldNightColor"                   component="y" />
+        </ScopeMapOperand>             
+        <ScopeMapResult     type="float">
+            <ScopeMap       type="vector3"      block="lighting"        name="fieldNightColor"                    component="y" />
+        </ScopeMapResult>
+    </Operation>
+    <Operation              name="Operation"    priority="0"            operation="Multiply"                      alwaysUpdate="1">
+        <ScopeMapOperand    type="float">
+            <ScopeMap       type="vector4"      block="lighting"        name="gXYZLightDirWenvNightScale"         component="w" />
+        </ScopeMapOperand>
+        <ScopeMapOperand    type="float">
+            <ScopeMap       type="vector3"      block="lighting"        name="gfieldNightColor"                   component="z" />
+        </ScopeMapOperand>                    
+        <ScopeMapResult     type="float">
+            <ScopeMap       type="vector3"      block="lighting"        name="fieldNightColor"                    component="z" />
+        </ScopeMapResult>
+    </Operation>
+    <!-- operation for runtime shadow behavior, which is dictated by both artist desire and presentation state  -->
+    <Operation              name="SelfShadowWhenNotOptRendering"      priority="0"      operation="BooleanNot"    alwaysUpdate="1">
+        <ScopeOperand       type="bool"         block="presentation"  name="enablePlayerOptimizedRendering" />
+        <ScopeResult        type="bool"         block="lighting"      name="gSelfShadowsOptimizationsDisabled" />
+    </Operation>
+    <Operation              name="Compute_gSelfShadowsRuntimeEnabled" priority="0"      operation="BooleanAnd"    alwaysUpdate="1">
+        <ScopeOperand       type="bool"         block="lighting"      name="gSelfShadowsEnabled" />
+        <ScopeOperand       type="bool"         block="lighting"      name="gSelfShadowsOptimizationsDisabled" />
+        <ScopeResult        type="bool"         block="lighting"      name="gSelfShadowsRuntimeEnabled" />
+    </Operation>
+      <!-- Weather Per Camera Lighting Tuning Parameters -->
+      <Operation              name="Operation"    priority="0"            operation="Select"  numOperands="3"         alwaysUpdate="1">
+          <ScopeOperand         type="bool"         block="post"        name="HDRApplyExposureWeatherMultiplier" />
+          <ConstantOperand      type="float"        value="1.0" />
+          <ScopeOperand         type="float"        block="post"        name="HDRExposureWeatherMultiplierInput" />
+          <ScopeResult          type="float"        block="post"        name="HDRExposureWeatherMultiplier" />
+      </Operation>
+      <Operation            name="Operation"    priority="0"        operation="Multiply"       alwaysUpdate="1">
+          <ScopeOperand    type="float"  block="post"   name="HDRExposureMultiplier" />
+          <ScopeOperand    type="float"  block="post"   name="HDRExposureWeatherMultiplier" />
+          <ScopeResult     type="float"  block="post"   name="HDRExposureMultiplierInterim" />
+      </Operation>
+      <Operation              name="Operation"    priority="0"            operation="Select"  numOperands="3"         alwaysUpdate="1">
+          <ScopeOperand         type="bool"     block="tonemapping" name="applySkyPCLWeatherMultiplier" />
+          <ConstantOperand      type="float"    value="1.0" />
+          <ScopeOperand         type="float"    block="tonemapping" name="skyPCLWeatherMultiplierInput" />
+          <ScopeResult          type="float"    block="tonemapping" name="skyPCLWeatherMultiplier" />
+      </Operation>
+      <Operation            name="Operation"    priority="0"        operation="Multiply"       alwaysUpdate="1">
+          <ScopeOperand    type="float" block="tonemapping" name="skyPCLMultiplier" />
+          <ScopeOperand    type="float" block="tonemapping" name="skyPCLWeatherMultiplier" />
+          <ScopeResult     type="float" block="tonemapping" name="skyXMultiplierYOffsetInterim" />
+      </Operation>
+      <!-- HDR Exposure Multiplier Parameters -->
+      <Operation            name="Operation"    priority="0"        operation="Multiply"       alwaysUpdate="1">
+          <ScopeOperand    type="float"  block="post"    name="HDRExposureInput" />
+          <ScopeOperand    type="float"  block="post"    name="HDRExposureMultiplierInterim" />
+          <ScopeResult     type="float"  block="post"    name="HDRExposure" />
+      </Operation>
+      <!-- Sky Per Camera Lighting Tuning Parameters -->
+      <Operation            name="Operation"    priority="0"        operation="Multiply"       alwaysUpdate="1">
+          <ScopeMapOperand    type="float">
+              <ScopeMap         type="vector2"      block="tonemapping"    name="skyXMultiplierYOffsetInput"     component="x"/>
+          </ScopeMapOperand>
+          <ScopeOperand    type="float" block="tonemapping" name="skyXMultiplierYOffsetInterim" />
+          <ScopeMapResult     type="float">
+              <ScopeMap         type="vector2"      block="tonemapping"    name="skyXMultiplierYOffset"  component="x" />
+          </ScopeMapResult>
+      </Operation>
+      <Operation            name="Operation"    priority="0"        operation="Multiply"       alwaysUpdate="1">
+          <ScopeMapOperand    type="float">
+              <ScopeMap         type="vector2"      block="tonemapping"    name="skyXMultiplierYOffsetInput"     component="y"/>
+          </ScopeMapOperand>
+          <ConstantOperand    type="float"        value="1.0" />
+          <ScopeMapResult     type="float">
+              <ScopeMap         type="vector2"      block="tonemapping"    name="skyXMultiplierYOffset"  component="y" />
+          </ScopeMapResult>
+      </Operation>
+      <!-- VFX Per Camera Lighting Tuning Parameters -->
+      <Operation            name="Operation"    priority="0"        operation="Multiply"       alwaysUpdate="1">
+          <ScopeOperand    type="float"  block="lighting" name="gCrossScaleInput" />
+          <ScopeOperand    type="float"  block="lighting" name="gCrossScaleMultiplier" />
+          <ScopeResult     type="float"  block="lighting" name="gCrossScale" />
+      </Operation>
+      <Operation            name="Operation"    priority="0"        operation="Multiply"       alwaysUpdate="1">
+          <ScopeOperand    type="float"  block="lighting" name="gGlowScaleInput" />
+          <ScopeOperand    type="float"  block="lighting" name="gGlowScaleMultiplier" />
+          <ScopeResult     type="float"  block="lighting" name="gGlowScale" />
+      </Operation>
+      <Operation            name="Operation"    priority="0"        operation="Multiply"       alwaysUpdate="1">
+          <ScopeOperand    type="float"  block="lighting" name="gHaloScaleInput" />
+          <ScopeOperand    type="float"  block="lighting" name="gHaloScaleMultiplier" />
+          <ScopeResult     type="float"  block="lighting" name="gHaloScale" />
+      </Operation>
+  </OperationList>
+  
+</root>
